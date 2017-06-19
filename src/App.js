@@ -8,29 +8,50 @@ class App extends Component {
     super(props);
 
     this.state = {
-      city: undefined
+      city: undefined,
+      temperature: undefined
+      // showTemp: false
     }
     this.getWeather = this.getWeather.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.onCityInput = this.onCityInput.bind(this);
   }
 
   getWeather(city) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
-      .then(function(response) {
-        return response.json()
-      }).then(function(json) {
+      .then(response => response.json())
+      .then(json => {
         console.log('parsed json', json)
+        console.log("THIS.STATE", this.state)
+        // debugger
+        this.setState({
+          temperature: this.convertTemp(json.main.temp)
+        })
       }).catch(function(ex) {
         console.log('parsing failed', ex)
       })
   }
 
+  convertTemp(temp) {
+    return parseFloat(temp - 273.15).toFixed(2)
+  }
+
+  onCityInput() {
+    let city = this.refs.city.value
+    this.setState({ city: city })
+    console.log("THIS.STATE", this.state)
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
     let city = this.refs.city.value
-    this.setState({city: city});
     this.getWeather(city);
-    console.log("THIS.STATE", this.state)
+  }
+
+  renderWeather() {
+    // if(this.state.showTemp){
+      return <div>The temperature in {this.state.city} is {this.state.temperature}°C</div>
+    // }
   }
 
   render() {
@@ -45,10 +66,13 @@ class App extends Component {
             ref="city"
             placeholder="Search by the city"
             value={this.state.city}
-            onChange={this.onFormSubmit}
+            onChange={this.onCityInput}
           />
           <button>Submit</button>
         </form>
+        {
+          this.renderWeather()
+        }
       </div>
     );
   }
