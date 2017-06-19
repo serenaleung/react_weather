@@ -9,8 +9,8 @@ class App extends Component {
 
     this.state = {
       city: undefined,
-      temperature: undefined
-      // showTemp: false
+      temperature: undefined,
+      showTemp: false
     }
     this.getWeather = this.getWeather.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -23,8 +23,8 @@ class App extends Component {
       .then(json => {
         console.log('parsed json', json)
         console.log("THIS.STATE", this.state)
-        // debugger
         this.setState({
+          showTemp: true,
           temperature: this.convertTemp(json.main.temp)
         })
       }).catch(function(ex) {
@@ -49,9 +49,9 @@ class App extends Component {
   }
 
   renderWeather() {
-    // if(this.state.showTemp){
+    if(this.state.showTemp){
       return <div>The temperature in {this.state.city} is {this.state.temperature}°C</div>
-    // }
+    }
   }
 
   render() {
