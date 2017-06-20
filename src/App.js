@@ -50,14 +50,14 @@ class App extends Component {
 
   renderWeather() {
     if(this.state.showTemp){
-      return <div>The temperature in {this.state.city} is {this.state.temperature}°C</div>
+      return <div className="result">The temperature in {this.state.city} is {this.state.temperature}°C</div>
     }
   }
 
   render() {
     return (
       <div className="App">
-        <h1>Get Weather</h1>
+        <h1 className="color">Get Weather</h1>
         <form onSubmit={this.onFormSubmit}>
           <input
             className="form"
@@ -68,7 +68,10 @@ class App extends Component {
             value={this.state.city}
             onChange={this.onCityInput}
           />
-          <button>Submit</button>
+          <span>
+            <br/>
+          </span>
+          <button className="btn">Submit</button>
         </form>
         {
           this.renderWeather()

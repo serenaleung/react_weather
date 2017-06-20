@@ -1,8 +1,28 @@
 .App {
   text-align: center;
+  margin-top: 4em;
 }
 
 .form {
-  padding: 0.6em 1em;
-  margin-right: 1em;
+  padding: 1em 18.4em 1em 1em;
+  margin-bottom: 1.5em;
+  font-size: 11.5px;
+}
+
+.btn {
+  color: #01c2cf;
+  background-color: white;
+  border: 1px solid #01c2cf;
+  padding: 1em 13.6em;
+  font-size: 11.5px;
+}
+
+.result {
+  margin-top: 1.5em;
+  font-size: 16px;
+  color: rgb(61, 61, 61);
+}
+
+.color {
+  color: rgb(61, 61, 61);
 }
